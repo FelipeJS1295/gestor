@@ -1,0 +1,302 @@
+/* Variables */
+:root {
+    --header-bg: #3b82f6;
+    --header-bg-scrolled: #3b82f6;
+    --header-color: #ffffff;
+    --header-height: 60px;
+    --sidebar-width: 240px;
+    --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --header-border: 1px solid rgba(255, 255, 255, 0.1);
+    --transition-speed: 0.3s;
+    --search-bg: rgba(255, 255, 255, 0.15);
+    --search-focus-bg: rgba(255, 255, 255, 0.25);
+    --action-hover-bg: rgba(255, 255, 255, 0.15);
+    --dropdown-bg: #ffffff;
+    --dropdown-text: #1f2937;
+    --dropdown-hover: #f3f4f6;
+    --dropdown-border: #e5e7eb;
+    --badge-bg: #ef4444;
+}
+
+/* Estilos del header */
+.app-header {
+    width: 100%;
+    height: var(--header-height);
+    background-color: var(--header-bg);
+    color: var(--header-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    transition: all var(--transition-speed) ease;
+    padding-left: var(--sidebar-width);
+}
+
+/* Efecto al hacer scroll */
+.app-header.scrolled {
+    background-color: var(--header-bg-scrolled);
+    box-shadow: var(--header-shadow);
+}
+
+/* Contenedor principal del header */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Parte izquierda del header */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Parte derecha del header */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Contenedor de búsqueda */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 0.5rem 0.75rem;
+    padding-right: 2.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--search-bg);
+    color: var(--header-color);
+    font-size: 0.875rem;
+    transition: all var(--transition-speed) ease;
+    width: 200px;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-input:focus {
+    outline: none;
+    background-color: var(--search-focus-bg);
+}
+
+.search-button {
+    position: absolute;
+    right: 0.5rem;
+    border: none;
+    background: transparent;
+    color: var(--header-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+}
+
+/* Acciones del header */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    color: var(--header-color);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all var(--transition-speed) ease;
+}
+
+.action-button:hover {
+    background-color: var(--action-hover-bg);
+}
+
+.action-button .icon {
+    font-size: 1.25rem;
+}
+
+/* Badge para notificaciones */
+.action-button .badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--badge-bg);
+    color: white;
+    font-size: 0.625rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Dropdown de usuario */
+.user-dropdown {
+    position: relative;
+}
+
+.user-button {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--header-color);
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all var(--transition-speed) ease;
+}
+
+.user-button:hover {
+    background-color: var(--action-hover-bg);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.dropdown-icon {
+    font-size: 0.75rem;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background-color: var(--dropdown-bg);
+    border-radius: 6px;
+    width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    z-index: 1010;
+    animation: dropdown-appear 0.2s ease-out;
+}
+
+@keyframes dropdown-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu li {
+    padding: 0.75rem 1rem;
+    color: var(--dropdown-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.dropdown-menu li:hover {
+    background-color: var(--dropdown-hover);
+}
+
+.dropdown-menu .divider {
+    height: 1px;
+    background-color: var(--dropdown-border);
+    padding: 0;
+    margin: 0.5rem 0;
+}
+
+.menu-icon {
+    font-size: 1.125rem;
+}
+
+/* Toggle para menú móvil */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.mobile-menu-toggle .bar {
+    height: 2px;
+    width: 100%;
+    background-color: var(--header-color);
+    border-radius: 2px;
+    transition: all var(--transition-speed) ease;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 992px) {
+    .search-input {
+        width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-header {
+        padding-left: 0;
+    }
+    
+    .header-container {
+        padding: 0 1rem;
+    }
+    
+    .search-container {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .header-right {
+        display: none;
+    }
+}
